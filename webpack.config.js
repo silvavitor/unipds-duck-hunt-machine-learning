@@ -8,7 +8,7 @@ module.exports = {
 
   context: __dirname,
   entry: {
-    duckhunt: './main.js',
+    duckhunt: './main.ts',
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -17,6 +17,11 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: 'ts-loader',
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -43,7 +48,7 @@ module.exports = {
       path: false
     },
     modules: ['node_modules'],
-    extensions: ['.js', '.min.js'],
+    extensions: ['.ts', '.tsx', '.js', '.min.js'],
   },
   devServer: {
     static: {

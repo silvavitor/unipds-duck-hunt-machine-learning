@@ -4,9 +4,10 @@
   "description": "Duckhunt implemented in JS",
   "scripts": {
     "gulp": "gulp",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint src/**/*.ts",
     "start": "webpack-dev-server",
     "build": "webpack",
+    "type-check": "tsc --noEmit",
     "audio": "gulp audio",
     "images": "gulp images",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +27,9 @@
     "@pixi/graphics": "^7.4.3",
     "@pixi/sprite-animated": "^7.4.3",
     "@pixi/text": "^7.4.3",
+    "@types/bluebird": "^3.5.42",
+    "@types/howler": "^2.2.12",
+    "@types/lodash": "^4.17.0",
     "audiosprite": "^0.6.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^10.0.0",
@@ -48,6 +52,8 @@
     "pixi.js": "^8.11.0",
     "script-loader": "^0.7.2",
     "tween.js": "^16.6.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.8.3",
     "webpack": "^5.100.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"
