@@ -1,6 +1,7 @@
 // Web Worker global declarations
 declare function importScripts(...urls: string[]): void;
 import type * as tfTypes from "@tensorflow/tfjs";
+import { PredictMessage } from "./types";
 declare const tf: typeof tfTypes;
 
 const MODEL_PATH = `yolov5n_web_model/model.json`;
@@ -50,7 +51,7 @@ function preProcessImage(input: ImageBitmap): tfTypes.Tensor<tfTypes.Rank> {
   });
 }
 
-self.onmessage = async ({ data }: MessageEvent) => {
+self.onmessage = async ({ data }: MessageEvent<PredictMessage>) => {
   if (data.type !== "predict") {
     return;
   }
@@ -60,6 +61,8 @@ self.onmessage = async ({ data }: MessageEvent) => {
   }
 
   const input = preProcessImage(data.image);
+
+  const { width, height } = data.image;
 
   postMessage({
     type: "prediction",

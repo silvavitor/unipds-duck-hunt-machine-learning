@@ -1,5 +1,6 @@
 import Game from "../src/modules/Game";
 import { buildLayout } from "./layout";
+import { PredictMessage } from "./types";
 
 export default async function main(game: Game) {
   const container = buildLayout(game.app);
@@ -27,16 +28,17 @@ export default async function main(game: Game) {
   };
 
   setInterval(async () => {
-    const canvas = game.app.renderer.extract.canvas(game.stage as any);
-    const bitmap = await createImageBitmap(canvas as any);
+    const canvas = game.app.renderer.extract.canvas(
+      game.stage,
+    ) as HTMLCanvasElement;
+    const bitmap = await createImageBitmap(canvas);
 
-    worker.postMessage(
-      {
-        type: "predict",
-        image: bitmap,
-      },
-      [bitmap],
-    );
+    const message: PredictMessage = {
+      type: "predict",
+      image: bitmap,
+    };
+
+    worker.postMessage(message, [bitmap]);
   }, 200);
 
   return container;
